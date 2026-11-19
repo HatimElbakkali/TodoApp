@@ -4,9 +4,10 @@ A simple Todo application built with React and TypeScript. It lets you list, cre
 
 ## Tech Stack
 
-<p> <img src="https://skillicons.dev/icons?i=react,ts,vite,axios,tailwind,eslint" alt="Tech stack icons" /> </p>
+<p> <img src="https://skillicons.dev/icons?i=react,ts,vite,tailwind,eslint" alt="Tech stack icons" /> </p>
 
-React · TypeScript · Vite · Axios · Tailwind CSS · ESLint · React Router · React Hook Form
+Librarys:
+Axios · React Router · React Hook Form
 
 ## Features
 
