@@ -101,6 +101,13 @@ On submit, it calls `Api.create` or `Api.update`, then redirects to the todo lis
 - Add filters (all / completed / pending)
 - Add tests
 
-## License
+## 📬 Connect
 
-MIT
+If you want to see more of my work or contact me:
+Portfolio: [https://hatimelbakkali.web.app/](https://hatimelbakkali.web.app/)
+
+Thank you!
+
+---
+
+Made with ❤️ by **Hatim Elbakkali**.
