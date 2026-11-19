@@ -1,27 +1,28 @@
 import customAxios from "./axios";
+import TodoModel from "../modules/TodoModel";
 
 export default {
-  get: async (id) => {
-    const data = await customAxios.get(`/${id}`);
-    return data.data;
-  },
-  getAll: async () => {
-    const data = await customAxios.get("/");
-    return data.data;
-  },
-  create: async (todo) => {
-    const data = await customAxios.post("/", todo);
-    return data;
-  },
-  update: async (todo) => {
-    console.log(customAxios.defaults.baseURL);
-    console.log(todo.id);
-
-    const response = await customAxios.put(`/${todo.id}`, todo);
-
+  get: async (id: string): Promise<TodoModel> => {
+    const response = await customAxios.get<TodoModel>(`/${id}`);
     return response.data;
   },
-  delete: async (id) => {
-    return await customAxios.delete(`/${id}`);
+
+  getAll: async (): Promise<TodoModel[]> => {
+    const response = await customAxios.get<TodoModel[]>("/");
+    return response.data;
+  },
+
+  create: async (todo: TodoModel): Promise<TodoModel> => {
+    const response = await customAxios.post<TodoModel>("/", todo);
+    return response.data;
+  },
+
+  update: async (todo: TodoModel): Promise<TodoModel> => {
+    const response = await customAxios.put<TodoModel>(`/${todo.id}`, todo);
+    return response.data;
+  },
+
+  delete: async (id: string): Promise<void> => {
+    await customAxios.delete(`/${id}`);
   },
 };

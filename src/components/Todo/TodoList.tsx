@@ -1,28 +1,23 @@
 import { useEffect, useState } from "react";
-import Api from "../../Api/Todo.ts";
-import {Link} from 'react-router-dom'
-
-type Todo = {
-  id: string;
-  title: string;
-  completed: boolean;
-};
+import { Link } from "react-router-dom";
+import Api from "../../Api/Todo";
+import TodoModel from "../../modules/TodoModel";
 
 export default function TodoList() {
-  const [todos, setTodo] = useState<Todo[]>([]);
+  const [todos, setTodos] = useState<TodoModel[]>([]);
 
   useEffect(() => {
     (async () => {
       const data = await Api.getAll();
-      setTodo(data);
+      setTodos(data);
     })();
   }, []);
 
-  const deleteCallbak = async (e: React.MouseEvent<HTMLButtonElement>) => {
+  const deleteCallback = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    const id: string = e.currentTarget.dataset.id!;
+    const id = e.currentTarget.dataset.id!;
     await Api.delete(id);
-    setTodo((prevState) => prevState.filter((todo) => todo.id !== id));
+    setTodos((prev) => prev.filter((t) => t.id !== id));
   };
 
   return (
@@ -77,7 +72,7 @@ export default function TodoList() {
 
                     <button
                       className="rounded-lg bg-red-500 px-4 py-2 text-sm font-medium text-white transition hover:bg-red-600"
-                      onClick={deleteCallbak}
+                      onClick={deleteCallback}
                       data-id={todo.id}
                     >
                       Delete
