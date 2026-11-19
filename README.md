@@ -1,75 +1,109 @@
-# React + TypeScript + Vite
+# TodoApp
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple Todo application built with React and TypeScript. It lets you list, create, update and complete todos, using a shared form component for both creating and editing.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- React + TypeScript
+- Vite
+- React Router
+- Axios
+- React Hook Form
+- Tailwind CSS
+- ESLint
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- List all todos
+- Create a new todo
+- Update an existing todo
+- Mark a todo as completed
+- Form validation (required title)
+- Single reusable `TodoForm` component for create and update
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Project Structure
 
 ```
-
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+src/
+├── Api/
+│   ├── axios.ts          # Axios instance and base configuration
+│   └── Todo.ts           # API functions (get, create, update...)
+├── components/
+│   ├── Layout.tsx        # Global layout
+│   ├── NavBar.tsx        # Navigation bar
+│   └── Todo/
+│       ├── TodoCreate.tsx
+│       ├── TodoForm.tsx  # Shared form (create + update)
+│       ├── TodoList.tsx
+│       └── TodoUpdate.tsx
+├── Data/
+│   └── database.json     # Mock data
+├── modules/
+│   └── TodoModel.ts      # Todo model
+├── App.tsx               # Routes
+├── index.css
+└── main.tsx              # Entry point
 ```
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18+
+- npm
+
+### Installation
+
+```bash
+git clone <your-repo-url>
+cd TodoApp
+npm install
+```
+
+### Run the app
+
+```bash
+npm run dev
+```
+
+The app runs on `http://localhost:5173` by default.
+
+### Mock API
+
+The data lives in `src/Data/database.json`. If you use [json-server](https://github.com/typicode/json-server) to serve it:
+
+```bash
+npx json-server --watch src/Data/database.json --port 3000
+```
+
+Then make sure the `baseURL` in `src/Api/axios.ts` matches that port.
+
+## Scripts
+
+| Command           | Description                  |
+| ----------------- | ---------------------------- |
+| `npm run dev`     | Start the dev server         |
+| `npm run build`   | Build for production         |
+| `npm run preview` | Preview the production build |
+| `npm run lint`    | Run ESLint                   |
+
+## How the Form Works
+
+`TodoForm` reads the `id` from the URL with `useParams`:
+
+- No `id` → create mode (empty default values)
+- With `id` → update mode (default values fetched from the API)
+
+On submit, it calls `Api.create` or `Api.update`, then redirects to the todo list.
+
+## Possible Improvements
+
+- Replace the `TodoModel` class with a TypeScript `interface`
+- Add delete confirmation
+- Use React Query for data fetching and caching
+- Add filters (all / completed / pending)
+- Add tests
+
+## License
+
+MIT

@@ -8,7 +8,7 @@ function Layout() {
           <li>
             <Link
               to="/"
-              className="text-gray-700 font-medium hover:text-blue-600 transition-colors"
+              className="text-gray-700 font-medium hover:text-purple-800 transition-colors"
             >
               List
             </Link>
@@ -17,7 +17,7 @@ function Layout() {
           <li>
             <Link
               to="/create"
-              className="text-gray-700 font-medium hover:text-blue-600 transition-colors"
+              className="text-gray-700 font-medium hover:text-purple-800 transition-colors"
             >
               Create
             </Link>

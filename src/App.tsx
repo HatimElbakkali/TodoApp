@@ -1,7 +1,7 @@
 import {Routes, Route} from "react-router-dom"
 import TodoList from './components/Todo/TodoList'
 import TodoCreate from './components/Todo/TodoCreate'
-import Layout from "./components/Layout"
+import Layout from "./components/ui/NavBar"
 import TodoUpdate from "./components/Todo/TodoUpdate"
 function App() {
   return (
